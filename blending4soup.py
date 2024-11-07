@@ -11,7 +11,17 @@ wiki_url = fetch_leader_wikipedia_text(get_leaders())
 response = requests.get(wiki_url)
 soup = BeautifulSoup(response.text, 'html.parser')
 
-for paragraph in soup.find_all('p'):
-    print(paragraph.text)
+# all paragraph
+paragraphs = soup.find_all('p')
+
+#get the 1st paragraph
+intro_paragraph = None
+for paragraph in paragraphs: 
+    text = paragraph.get_text(strip=True) #check non-empty paragraphs
+    if text:  
+        intro_paragraph = text
+        break
+
+print(intro_paragraph)
 
 
