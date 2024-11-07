@@ -5,7 +5,7 @@
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributors](#contributors)
-- [Project status](#project-status)
+
 
 ## Description
 This project fetches data about country leaders, including their names and Wikipedia URLs, from a public API. It retrieves the first paragraph from each leader's Wikipedia page and stores the information in a JSON file. 
