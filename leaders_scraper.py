@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 from requests import Session
 import time
 import json
+import re
 
 def session_loop_request(session, url, cookies=None, params=None, retry=False):    
     response = session.get(url, cookies=cookies, params=params)
@@ -56,11 +57,13 @@ def get_first_paragraph(session, wikipedia_url):
     paragraphs = soup.find_all('p')
     first_paragraph = None
     for paragraph in paragraphs:
-        text = paragraph.get_text(separator=" ",strip=True)# this fix also the wikilinks problem
+        text = paragraph.get_text(separator=" ",strip=True)# this fix the words problem
         if text:
             first_paragraph = text
             break 
- 
+
+    if first_paragraph: 
+        first_paragraph = re.sub(r'\(\[\s?.*?\s?\]\s?\/.*?;?\)|\[\s?[a-zA-Z0-9]\s?\]', '', first_paragraph) #this fix refefences[1],[a]
        
     return first_paragraph
 
